@@ -4,7 +4,6 @@ namespace Kodeloper\Generator\Generators;
 
 use Illuminate\Support\Carbon;
 
-
 class MigrationGenerator extends BaseGenerator
 {
     protected $fields = [];
@@ -17,8 +16,8 @@ class MigrationGenerator extends BaseGenerator
     protected function getStubFilePath()
     {
         return config('generator.custom_stubs')
-            ? config('generator.custom_stubs.path') . '/Migration.stub'
-            : __DIR__ . '/../Stubs/Migration.stub';
+            ? config('generator.custom_stubs.path').'/Migration.stub'
+            : __DIR__.'/../Stubs/Migration.stub';
     }
 
     public function fromSchema(array $data)
@@ -34,7 +33,7 @@ class MigrationGenerator extends BaseGenerator
              ->replaceTable()
              ->replaceFields();
 
-        $this->generateFile($this->config['path'], Carbon::now()->format('Y_m_d_His') . "_create_{$this->data['table']}_table.php");
+        $this->generateFile($this->config['path'], Carbon::now()->format('Y_m_d_His')."_create_{$this->data['table']}_table.php");
 
         return $this->stub;
     }
@@ -42,25 +41,27 @@ class MigrationGenerator extends BaseGenerator
     private function replaceClass()
     {
         $this->stub = $stub = str_replace('{{class}}', "Create{$this->data['model']}Table", $this->stub);
+
         return $this;
     }
 
     private function replaceTable()
     {
         $this->stub = $stub = str_replace('{{table}}', $this->data['table'], $this->stub);
+
         return $this;
     }
 
     private function replaceFields()
     {
         $this->getFields()->map(function ($attributes, $field) {
-            $parser = 'parse' . ucfirst(camel_case($attributes['type']) . 'Field');
+            $parser = 'parse'.ucfirst(camel_case($attributes['type']).'Field');
             if (method_exists($this, $parser)) {
                 $this->fields[] = $this->$parser($field, $attributes);
             }
         });
 
-        $this->stub = $stub = str_replace('{{fields}}', implode("\t\t" . PHP_EOL, $this->fields), $this->stub);
+        $this->stub = $stub = str_replace('{{fields}}', implode("\t\t".PHP_EOL, $this->fields), $this->stub);
 
         return $this;
     }

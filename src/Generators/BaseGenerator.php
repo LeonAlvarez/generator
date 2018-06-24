@@ -14,17 +14,18 @@ class BaseGenerator
 
     public function generateFile($path, $file, $options = ['override' => false, 'merge' => true])
     {
-        if ( !$options['override']) {
+        if (! $options['override']) {
             $this->rollbackOldFile($path, $file);
         }
-        FileSystemUtil::createFile($path, $file, $this->stub , $options['merge']);
+        FileSystemUtil::createFile($path, $file, $this->stub, $options['merge']);
+
         return $this;
     }
 
     public function rollbackOldFile($path, $file)
     {
         if (file_exists($path.$file)) {
-            if (!copy($path.$file, $path.now()->format('d_m_Y_h_i_s').'_'.$file.'._bkp')) {
+            if (! copy($path.$file, $path.now()->format('d_m_Y_h_i_s').'_'.$file.'._bkp')) {
                 return false;
             } /*else {
                 return FileSystemUtil::deleteFile($path, $file);
@@ -80,10 +81,11 @@ class BaseGenerator
      *
      * @return $this
      */
-    public function mergeContent($path , $file)
+    public function mergeContent($path, $file)
     {
-        $currrentContent = file_get_contents($path . $file);
+        $currrentContent = file_get_contents($path.$file);
         dd($currrentContent);
+
         return $this;
     }
 }
