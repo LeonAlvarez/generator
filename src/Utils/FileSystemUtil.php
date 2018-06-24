@@ -11,6 +11,7 @@ class FileSystemUtil
         if ($merge) {
             return file_put_contents($path, $contents, FILE_APPEND | LOCK_EX);
         }
+
         return file_put_contents($path, $contents);
     }
 

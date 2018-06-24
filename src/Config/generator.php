@@ -11,9 +11,9 @@ return [
    |
    */
     'models' => [
-        'namespace'  => 'App\Models',
-        'path'       => app_path('Models/'),
-        'extends'    => 'Illuminate\Database\Eloquent\Model',
+        'namespace' => 'App\Models',
+        'path' => app_path('Models/'),
+        'extends' => 'Illuminate\Database\Eloquent\Model',
         'timestamps' => [
             'enabled' => true,
             'fields' => [
@@ -36,7 +36,7 @@ return [
    */
     'controllers' => [
         'namespace' => 'App\Http\Controllers',
-        'path'      => app_path('Http/Controllers/'),
+        'path' => app_path('Http/Controllers/'),
     ],
 
     /*
@@ -55,7 +55,7 @@ return [
         ],
         'controllers' => [
             'namespace' => 'App\Http\Controllers\Api',
-            'path'      => app_path('Http/Controllers/Api/'),
+            'path' => app_path('Http/Controllers/Api/'),
         ],
         'request' => [
             'namespace' => 'App\Http\Requests\Api',

@@ -2,23 +2,20 @@
 
 namespace Kodeloper\Generator\Generators;
 
-use Illuminate\Support\Carbon;
-
-
 class RoutesGenerator extends BaseGenerator
 {
     /**
      * Get the routes stub file path for the generator.
      *
-     * @param String $type @default ''
+     * @param string $type @default ''
      *
      * @return string
      */
     protected function getStubFilePath(String $type = '')
     {
         return config('generator.custom_stubs')
-            ? config('generator.custom_stubs.path') . '/'. $type . 'Routes.stub'
-            : __DIR__ . '/../Stubs/'. $type . 'Routes.stub';
+            ? config('generator.custom_stubs.path').'/'.$type.'Routes.stub'
+            : __DIR__.'/../Stubs/'.$type.'Routes.stub';
     }
 
     public function fromSchema(array $data)
@@ -43,7 +40,7 @@ class RoutesGenerator extends BaseGenerator
             ->replaceModelBinding()
             ->replaceController();
 
-        $this->generateFile($this->config['routes']['path'], $this->config['routes']['file'] , ['override' => true, 'merge' => true]);
+        $this->generateFile($this->config['routes']['path'], $this->config['routes']['file'], ['override' => true, 'merge' => true]);
 
         return $this->stub;
     }
@@ -51,18 +48,21 @@ class RoutesGenerator extends BaseGenerator
     private function replaceApiVersion()
     {
         $this->stub = $stub = str_replace('{{ApiVersion}}', $this->config['version'], $this->stub);
+
         return $this;
     }
 
     private function replaceResource()
     {
-        $this->stub = $stub = str_replace('{{Resource}}', $this->data['resource'] , $this->stub);
+        $this->stub = $stub = str_replace('{{Resource}}', $this->data['resource'], $this->stub);
+
         return $this;
     }
 
     private function replaceModelBinding()
     {
-        $this->stub = $stub = str_replace('{{ModelBinding}}', strtolower($this->data['model']) , $this->stub);
+        $this->stub = $stub = str_replace('{{ModelBinding}}', strtolower($this->data['model']), $this->stub);
+
         return $this;
     }
 
@@ -70,10 +70,11 @@ class RoutesGenerator extends BaseGenerator
     {
         $controllerNamespace = str_replace('App\\Http\\Controllers\\', '', $this->config['controllers']['namespace']);
         $controller = $controllerNamespace != '' ?
-            $controllerNamespace . '\\' . $this->data['model'] . 'Controller'
-            : $this->data['model'] . 'Controller';
+            $controllerNamespace.'\\'.$this->data['model'].'Controller'
+            : $this->data['model'].'Controller';
 
-        $this->stub = $stub = str_replace('{{Controller}}', $controller , $this->stub);
+        $this->stub = $stub = str_replace('{{Controller}}', $controller, $this->stub);
+
         return $this;
     }
 }

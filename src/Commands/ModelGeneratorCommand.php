@@ -3,8 +3,8 @@
 namespace Kodeloper\Generator\Commands;
 
 use Kodeloper\Generator\Generators\ModelGenerator;
-use Kodeloper\Generator\Generators\MigrationGenerator;
 use Kodeloper\Generator\Generators\RoutesGenerator;
+use Kodeloper\Generator\Generators\MigrationGenerator;
 
 class ModelGeneratorCommand extends BaseGeneratorCommand
 {
