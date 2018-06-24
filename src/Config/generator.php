@@ -48,16 +48,18 @@ return [
     |
     */
     'api' => [
-        'routes' => base_path('routes/api.php'),
-        'route_prefix' => 'api',
         'version' => 'v1',
+        'routes' => [
+            'path' => base_path('routes/'),
+            'file' => 'api.php',
+        ],
         'controllers' => [
-            'namespace' => 'App\Http\Controllers\API',
-            'path'      => app_path('Http/Controllers/API/'),
+            'namespace' => 'App\Http\Controllers\Api',
+            'path'      => app_path('Http/Controllers/Api/'),
         ],
         'request' => [
-            'namespace' => 'App\Http\Requests\API',
-            'path' => app_path('Http/Requests/API/'),
+            'namespace' => 'App\Http\Requests\Api',
+            'path' => app_path('Http/Requests/Api/'),
         ],
     ],
 

@@ -4,6 +4,7 @@ namespace Kodeloper\Generator\Commands;
 
 use Kodeloper\Generator\Generators\ModelGenerator;
 use Kodeloper\Generator\Generators\MigrationGenerator;
+use Kodeloper\Generator\Generators\RoutesGenerator;
 
 class ModelGeneratorCommand extends BaseGeneratorCommand
 {
@@ -27,6 +28,8 @@ class ModelGeneratorCommand extends BaseGeneratorCommand
     protected $description = 'Create new  model command';
 
     private $generator;
+    private $migrationGenerator;
+    private $routesGenerator;
 
     /**
      * Create a new command instance.
@@ -38,6 +41,7 @@ class ModelGeneratorCommand extends BaseGeneratorCommand
         parent::__construct();
         $this->generator = new ModelGenerator();
         $this->migrationGenerator = new MigrationGenerator();
+        $this->routesGenerator = new RoutesGenerator();
     }
 
     /**
@@ -53,7 +57,8 @@ class ModelGeneratorCommand extends BaseGeneratorCommand
         $command_data['table'] = $this->option('table') ?? str_plural($this->argument('name'));
         if ($this->option('from_schema')) {
             //$this->generator->fromSchema($command_data);
-            $this->line($this->migrationGenerator->fromSchema($command_data));
+            //$this->line($this->migrationGenerator->fromSchema($command_data));
+            $this->line($this->routesGenerator->fromSchema($command_data));
         } else {
             $command_data['primary_key'] = $this->option('pk') ?? config('generator.models.primary_key');
             $softDeletes = $this->option('soft-deletes') ?? config('generator.models.soft_delete');

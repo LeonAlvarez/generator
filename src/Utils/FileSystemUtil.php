@@ -4,11 +4,14 @@ namespace Kodeloper\Generator\Utils;
 
 class FileSystemUtil
 {
-    public static function createFile($path, $file, $contents)
+    public static function createFile($path, $file, $contents, $merge = false)
     {
         self::createDirectoryIfNotExist($path);
         $path = $path.$file;
-        file_put_contents($path, $contents);
+        if ($merge) {
+            return file_put_contents($path, $contents, FILE_APPEND | LOCK_EX);
+        }
+        return file_put_contents($path, $contents);
     }
 
     public static function createDirectoryIfNotExist($path, $replace = false)

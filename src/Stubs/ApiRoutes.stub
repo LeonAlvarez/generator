@@ -1,0 +1,8 @@
+
+Route::group(['prefix' => '{{ApiVersion}}', 'middleware' => 'auth:api'], function () {
+    Route::get('{{Resource}}', '{{Controller}}@index');
+    Route::get('{{Resource}}/{{{ModelBinding}}}', '{{Controller}}@show');
+    Route::post('{{Resource}}', '{{Controller}}@store');
+    Route::put('{{Resource}}/{{{ModelBinding}}}', '{{Controller}}@update');
+    Route::delete('{{Resource}}/{{{ModelBinding}}}', '{{Controller}}@delete');
+});
